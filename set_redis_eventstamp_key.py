@@ -23,7 +23,6 @@ def worker():
     for host, port in JOBS:
         try:
             conn = credis.Connection(host=host, port=port)
-            conn.execute('set', 'redis_eventstamp_key', int(time.time()))
             global recentInputEventHandled
             lastInputEventHandled = int(conn.execute('get', 'lastInputEventHandled'))
             if lastInputEventHandled - recentInputEventHandled > 4000:
