@@ -25,7 +25,7 @@ def worker():
             conn = credis.Connection(host=host, port=port)
             global recentInputEventHandled
             lastInputEventHandled = int(conn.execute('get', 'app::lastInputEventHandled'))
-            if lastInputEventHandled - recentInputEventHandled > 4000:
+            if lastInputEventHandled - recentInputEventHandled > 100000:
                 recentInputEventHandled = lastInputEventHandled
                 print 'found recent input event handled', recentInputEventHandled
                 os.link(os.path.join(root, 'dump.rdb'), os.path.join(root, 'dump.rdb.%s' % recentInputEventHandled))
