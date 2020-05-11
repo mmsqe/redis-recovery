@@ -24,7 +24,7 @@ def worker():
         try:
             conn = credis.Connection(host=host, port=port)
             global recentInputEventHandled
-            lastInputEventHandled = int(conn.execute('get', 'lastInputEventHandled'))
+            lastInputEventHandled = int(conn.execute('get', 'app::lastInputEventHandled'))
             if lastInputEventHandled - recentInputEventHandled > 4000:
                 recentInputEventHandled = lastInputEventHandled
                 print 'found recent input event handled', recentInputEventHandled
